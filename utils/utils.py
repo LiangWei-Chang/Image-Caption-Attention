@@ -5,11 +5,11 @@ import os
 
 def load_pickle(path):
     with open(path, 'rb') as f:
-        file = pickle.load(f)
+        file = cPickle.load(f)
         print ('Loaded %s..' %path)
         return file
 
 def save_pickle(data, path):
     with open(path, 'wb') as f:
-        pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
+        cPickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
         print ('Saved %s..' %path)
