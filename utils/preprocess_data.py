@@ -1,8 +1,8 @@
 import os
 import sys
 
-sys.path.append('../utils')
-sys.path.append('../model')
+sys.path.append('utils')
+sys.path.append('model')
 
 import tensorflow as tf
 import numpy as np
