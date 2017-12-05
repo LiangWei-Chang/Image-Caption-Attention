@@ -1,5 +1,5 @@
 import numpy as np
-import cPickle as pickle
+import _pickle as cPickle
 import hickle
 import os
 
