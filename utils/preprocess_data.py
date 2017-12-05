@@ -177,7 +177,7 @@ def main():
             for start, end in zip(range(0, n, BATCH_SIZE), range(BATCH_SIZE, n + BATCH_SIZE, BATCH_SIZE)):
                 batch_file = image_path[start:end]
                 image_batch = np.array([ ndimage.imread(x, mode='RGB') for x in batch_file ]).astype(np.float32)
-                feats = sess.run(vgg.conv5_3, feed_dict={images: image_batch, train_mode: False})
+                feats = sess.run(vgg.feats, feed_dict={images: image_batch, train_mode: False})
                 features[start:end, :] = feats
                 pbar.update(1)
 
