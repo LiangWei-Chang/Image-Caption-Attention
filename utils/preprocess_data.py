@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import json
 import hickle
-from unils.utils import *
+from utils.utils import *
 from collections import Counter
 from model import vgg19
 from scipy import ndimage
