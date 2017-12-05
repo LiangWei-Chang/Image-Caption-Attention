@@ -1,12 +1,17 @@
 import os
+import sys
+
+sys.path.append('../utils')
+sys.path.append('../model')
+
 import tensorflow as tf
 import numpy as np
 import pandas as pd
 import json
 import hickle
-from utils import utils
+from utils import *
 from collections import Counter
-from model import vgg19
+import vgg19
 from scipy import ndimage
 
 def preprocess_data(caption_file, image_dir, max_length):
