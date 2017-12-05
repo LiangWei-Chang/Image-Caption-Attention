@@ -181,7 +181,7 @@ def main():
                 features[start:end, :] = feats
                 pbar.update(1)
 
-            hickle.dump(feats, feature_path)
+            save_pickle(feats, feature_path)
 
 if __name__ == '__main__':
     main()
