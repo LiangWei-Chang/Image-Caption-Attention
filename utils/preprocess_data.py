@@ -13,6 +13,7 @@ from utils import *
 from collections import Counter
 import vgg19
 from scipy import ndimage
+from tqdm import tqdm
 
 def preprocess_data(caption_file, image_dir, max_length):
     with open(caption_file) as f:
