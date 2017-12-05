@@ -88,7 +88,7 @@ def build_caption_vector(annotations, word2idx, max_length=15):
         cap_vec = [word2idx['<BEG>']] + cap_vec + [word2idx['<END>']]
 
         # Zero padding
-        for j in range(len(cap_vec), max_length):
+        for j in range(len(cap_vec), max_length + 2):
             cap_vec.append(word2idx['<PAD>'])
 
         captions[i, :] = np.asarray(cap_vec)
