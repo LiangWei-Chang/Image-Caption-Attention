@@ -29,11 +29,13 @@ def main():
 		print('Start to resize %s images' % split)
 
 		image_files = os.listdir(folder_path)
-		for i, image_file in tqdm(enumerate(image_files)):
+		pbar = tqdm(total=len(image_files))
+		for i, image_file in enumerate(image_files):
 			with open(os.path.join(folder_path, image_file), 'r+b') as f:
 				with Image.open(f) as image:
 					image = resize_image(image)
 					image.save(os.path.join(resize_folder_path, image_file), image.format)
+			pbar.update(1)
 
 if __name__ == '__main__':
 	main()
