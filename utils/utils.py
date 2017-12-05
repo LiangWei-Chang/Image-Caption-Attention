@@ -11,5 +11,5 @@ def load_pickle(path):
 
 def save_pickle(data, path):
     with open(path, 'wb') as f:
-        cPickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
+        cPickle.dump(data, f, cPickle.HIGHEST_PROTOCOL)
         print ('Saved %s..' %path)
