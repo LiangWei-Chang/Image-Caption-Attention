@@ -144,7 +144,7 @@ def main():
             word2idx = build_vocab(annotations=annotations, threshold=word_count_threshold)
             save_pickle(word2idx, './dataset/vocab.pkl')
 
-        captions = build_caption_vector(annotations=annotations, word_to_idx=word_to_idx, max_length=max_length)
+        captions = build_caption_vector(annotations=annotations, word2idx=word2idx, max_length=max_length)
         save_pickle(captions, './dataset/%s_captions.pkl' % split)
 
         file_names, id2idx = build_file_names(annotations)
