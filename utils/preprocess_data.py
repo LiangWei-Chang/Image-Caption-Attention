@@ -133,25 +133,25 @@ def main():
                                image_dir='./dataset/val2014_resized',
                                max_length=max_length)
 
-    utils.save_pickle(training_data, './dataset/train_annotations.pkl')
-    utils.save_pickle(val_data, './dataset/val_annotations.pkl')
+    save_pickle(training_data, './dataset/train_annotations.pkl')
+    save_pickle(val_data, './dataset/val_annotations.pkl')
 
     for split in ['train', 'val']:
-        annotations = utils.load_pickle('./dataset/%s_annotations.pkl' % split)
+        annotations = load_pickle('./dataset/%s_annotations.pkl' % split)
 
         # Build Vocabulary
         if split == 'train':
             word2idx = build_vocab(annotations=annotations, threshold=word_count_threshold)
-            utils.save_pickle(word2idx, './dataset/vocab.pkl')
+            save_pickle(word2idx, './dataset/vocab.pkl')
 
         captions = build_caption_vector(annotations=annotations, word_to_idx=word_to_idx, max_length=max_length)
-        utils.save_pickle(captions, './dataset/%s_captions.pkl' % split)
+        save_pickle(captions, './dataset/%s_captions.pkl' % split)
 
         file_names, id2idx = build_file_names(annotations)
-        utils.save_pickle(file_names, './dataset/%s_filenames.pkl' % split)
+        save_pickle(file_names, './dataset/%s_filenames.pkl' % split)
 
         image_idxs = build_image_idxs(annotations, id2idx)
-        utils.save_pickle(image_idxs, './dataset/%s_imageIdxs.pkl' % split)
+        save_pickle(image_idxs, './dataset/%s_imageIdxs.pkl' % split)
 
     # extract conv5_3 feature vectors
     BATCH_SIZE = 128
@@ -166,7 +166,7 @@ def main():
         for split in ['train', 'val']:
             anno_path = './dataset/%s_annotations.pkl' % split
             feature_path = './dataset/%s_features.hkl' % split
-            annotations = utils.load_pickle(anno_path)
+            annotations = load_pickle(anno_path)
             image_path = list(annotations['file_name'].unique())
             n = len(image_path)
 
