@@ -166,7 +166,7 @@ def main():
         sess.run(tf.global_variables_initializer())
         for split in ['train', 'val']:
             anno_path = './dataset/%s_annotations.pkl' % split
-            feature_path = './dataset/%s_features.hkl' % split
+            feature_path = './dataset/%s_features.pkl' % split
             annotations = load_pickle(anno_path)
             image_path = list(annotations['file_name'].unique())
             n = len(image_path)
