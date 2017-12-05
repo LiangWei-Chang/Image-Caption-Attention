@@ -28,7 +28,7 @@ def main():
 			os.makedirs(resize_folder_path)
 		print('Start to resize %s images' % split)
 
-		image_files = os.listdir(folder)
+		image_files = os.listdir(folder_path)
 		for i, image_file in tqdm(enumerate(image_files)):
 			with open(os.path.join(folder_path, image_file), 'r+b') as f:
 				with Image.open(f) as image:
