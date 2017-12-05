@@ -22,8 +22,8 @@ def resize_image(image):
 def main():
 	splits = ['train', 'val']
 	for split in splits:
-		folder_path = '../dataset/%s2014' % split
-		resize_folder_path = '../dataset/%s2014_resized/' % split
+		folder_path = './dataset/%s2014' % split
+		resize_folder_path = './dataset/%s2014_resized/' % split
 		if not os.path.exists(resize_folder_path):
 			os.makedirs(resize_folder_path)
 		print('Start to resize %s images' % split)
