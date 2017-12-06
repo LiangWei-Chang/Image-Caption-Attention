@@ -70,13 +70,16 @@ def build_vocab(annotations, threshold=1):
     vocab = [ word for word in counter if counter[word] >= threshold ]
     print ('Filtered %d words to %d words with word count threshold %d.' % (len(counter), len(vocab), threshold))
 
-    word2idx = {u'<PAD>': 0, u'<BEG>': 1, u'<END>': 2}
+    word2idx = {'<PAD>': 0, '<BEG>': 1, '<END>': 2}
+    idx2word = {0: '<PAD>', 1: '<BEG>', 2: '<END>'}
+
     idx = 3
     for word in vocab:
         word2idx[word] = idx
+        idx2word[idx] = word
         idx += 1
 
-    return word2idx
+    return word2idx, idx2word
 
 def build_caption_vector(annotations, word2idx, max_length=15):
     n = len(annotations)
@@ -142,8 +145,9 @@ def main():
 
         # Build Vocabulary
         if split == 'train':
-            word2idx = build_vocab(annotations=annotations, threshold=word_count_threshold)
-            save_pickle(word2idx, './dataset/vocab.pkl')
+            word2idx, idx2word = build_vocab(annotations=annotations, threshold=word_count_threshold)
+            save_pickle(word2idx, './dataset/word2idx.pkl')
+            save_pickle(idx2word, './dataset/idx2word.pkl')
 
         captions = build_caption_vector(annotations=annotations, word2idx=word2idx, max_length=max_length)
         save_pickle(captions, './dataset/%s_captions.pkl' % split)
