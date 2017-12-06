@@ -1,6 +1,5 @@
 import numpy as np
 import _pickle as cPickle
-import hickle
 import os
 
 def load_pickle(path):
