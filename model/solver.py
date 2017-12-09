@@ -4,11 +4,12 @@ import skimage.transform
 import numpy as np
 import time
 import os
-import cPickle as pickle
+import _pickle as cPickle
 from scipy import ndimage
+import sys
+sys.path.append('utils')
 from utils import *
-from bleu import evaluate
-
+from tqdm import tqdm
 
 class CaptioningSolver(object):
     def __init__(self, model, data, val_data, **kwargs):
@@ -115,7 +116,7 @@ class CaptioningSolver(object):
             curr_loss = 0
             start_t = time.time()
 
-            for e in range(self.n_epochs):
+            for e in tqdm(range(self.n_epochs)):
                 rand_idxs = np.random.permutation(n_examples)
                 captions = captions[rand_idxs]
                 image_idxs = image_idxs[rand_idxs]
@@ -148,20 +149,6 @@ class CaptioningSolver(object):
                 print "Elapsed time: ", time.time() - start_t
                 prev_loss = curr_loss
                 curr_loss = 0
-
-                # print out BLEU scores and file write
-                if self.print_bleu:
-                    all_gen_cap = np.ndarray((val_features.shape[0], 20))
-                    for i in range(n_iters_val):
-                        features_batch = val_features[i*self.batch_size:(i+1)*self.batch_size]
-                        feed_dict = {self.model.features: features_batch}
-                        gen_cap = sess.run(generated_captions, feed_dict=feed_dict)
-                        all_gen_cap[i*self.batch_size:(i+1)*self.batch_size] = gen_cap
-
-                    all_decoded = decode_captions(all_gen_cap, self.model.idx_to_word)
-                    save_pickle(all_decoded, "./data/val/val.candidate.captions.pkl")
-                    scores = evaluate(data_path='./data', split='val', get_scores=True)
-                    write_bleu(scores=scores, path=self.model_path, epoch=e)
 
                 # save model's parameters
                 if (e+1) % self.save_every == 0:
@@ -230,4 +217,4 @@ class CaptioningSolver(object):
                     feed_dict = { self.model.features: features_batch }
                     all_sam_cap[i*self.batch_size:(i+1)*self.batch_size] = sess.run(sampled_captions, feed_dict)
                 all_decoded = decode_captions(all_sam_cap, self.model.idx_to_word)
-                save_pickle(all_decoded, "./data/%s/%s.candidate.captions.pkl" %(split,split))
+                save_pickle(all_decoded, "./dataset/%s_candidate_captions.pkl" %(split,split))

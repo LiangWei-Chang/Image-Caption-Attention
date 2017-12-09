@@ -186,7 +186,7 @@ def main():
                 pbar.update(1)
 
             hickle.dump(features, feature_path)
-            print("Saved %s.." % (save_path))
+            print("Saved %s.." % (feature_path))
 
 if __name__ == '__main__':
     main()
