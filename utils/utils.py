@@ -18,7 +18,7 @@ def load_dataset(split):
     data = {}
 
     # Load Preprocessed Data
-    data['features'] = load_pickle(os.path.join(data_path, '%s_features.pkl' % split))
+    data['features'] = load_pickle(os.path.join(data_path, '%s_features.hkl' % split))
     data['file_names'] = load_pickle(os.path.join(data_path, '%s_filenames.pkl' % split))
     data['captions'] = load_pickle(os.path.join(data_path, '%s_captions.pkl' % split))
     data['image_idxs'] = load_pickle(os.path.join(data_path, '%s_imageIdxs.pkl' % split))

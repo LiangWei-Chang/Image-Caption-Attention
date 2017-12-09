@@ -2,7 +2,8 @@ import os
 import sys
 sys.path.append('utils')
 sys.path.append('model')
-
+from model import *
+from solver import *
 from utils import load_dataset
 
 def main():
